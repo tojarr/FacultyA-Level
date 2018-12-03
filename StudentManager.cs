@@ -9,6 +9,7 @@ namespace FacultyA_Level
     class StudentManager
     {
         IWriter _Writer;
+        public string _DefaultName = "Student";
 
 
         public StudentManager(IWriter writer)
@@ -19,11 +20,10 @@ namespace FacultyA_Level
 
         public Student CreateStudent(int number, int course)
         {
-            string _Name = "Student";
             Student student;
 
             
-            student = new Student(String.Format("{0}{1}/{2}",_Name, number, course), course);
+            student = new Student(String.Format("{0}{1}/{2}",_DefaultName, number, course), course);
 
             if (student.Course < 5)
             {

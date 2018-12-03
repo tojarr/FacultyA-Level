@@ -10,11 +10,9 @@ namespace FacultyA_Level
     {
         public void WriteError(string error)
         {
-            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(error);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.ReadKey();
         }
 
         public void WriteInfo(string info)

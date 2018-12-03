@@ -9,9 +9,15 @@ namespace FacultyA_Level
     class Group
     {
         public string _GroupName;
+        public int GroupCourse;
         int _NamberOfStudent = 3;
-        public List<Student> StudentsList = new List<Student>();
+        public List<Student> StudentsList;
         IWriter _Writer;
+
+        public Group()
+        {
+
+        }
 
         public Group(IWriter writer, string name)
         {
@@ -19,36 +25,11 @@ namespace FacultyA_Level
             _GroupName = name;
         }
 
-        public List<Student> GreateStudentsList()
+        public List<Student> GreateStudentsList(int course)
         {
+            StudentsList = new List<Student>();
             StudentManager _StudentManager = new StudentManager(_Writer);
-            string str;
-            bool b = true;
-            int course = 0;
-
-            while (b)
-            {
-                _Writer.WriteInfo("Enter course for group.(1 - 6)");
-
-                str = Console.ReadLine();
-
-                bool success = Int32.TryParse(str, out course);
-                if (success)
-                {
-                    if (course <= 0 || course > 6)
-                    {
-                        _Writer.WriteError("Course value must be 1 - 6.");
-                    }
-                    else
-                    {
-                        b = false;
-                    }
-                }
-                else
-                {
-                    _Writer.WriteError("Enter number 1 - 6.");
-                }
-            }
+            GroupCourse = course;
 
             for (int i = 0; i < _NamberOfStudent; i++)
             {
@@ -61,8 +42,6 @@ namespace FacultyA_Level
                     StudentsList.Add(student);
                 }
             }
-
-
             return StudentsList;
         }
 

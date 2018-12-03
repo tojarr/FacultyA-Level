@@ -6,12 +6,26 @@ using System.Threading.Tasks;
 
 namespace FacultyA_Level
 {
+    enum Subjects
+    {
+        Math,
+        Geometry,
+        Physics,
+        History
+    }
+    enum Spec
+    {
+        Cybernetics,
+        InformationTechnology
+    }
     class Faculty
     {
-        public List<Specialization> Specializations = new List<Specialization>();
+        public List<Specialization> SpecializationsList;
+        public List<Teacher> TeachersList;
         IWriter _Writer;
         int NamderOfSpecializations = 2;
-        string _DefaultNamepecializations = "Spec";
+        string _Namepecializations = "Spec";
+        Spec spec;
 
         public Faculty(IWriter writer)
         {
@@ -21,24 +35,26 @@ namespace FacultyA_Level
 
         public List<Specialization> CreateSpecializations()
         {
+            SpecializationsList = new List<Specialization>();
             for (int i = 0; i < NamderOfSpecializations; i++)
             {
-
-                Specialization specialization = new Specialization(_Writer, _DefaultNamepecializations + (i + 1));
-                _Writer.WriteInfo(_DefaultNamepecializations + (i + 1));
-                specialization.CreateGroups();
+                spec = (Spec)i;
+                _Namepecializations = spec.ToString();
+                Specialization specialization = new Specialization(_Writer, _Namepecializations);
+                _Writer.WriteInfo(_Namepecializations);
+                specialization.CreateGroups((int)spec);
                 specialization.CreateSubjects();
-                Specializations.Add(specialization);
+                SpecializationsList.Add(specialization);
                 Console.Clear();
             }
 
-            return Specializations;
+            return SpecializationsList;
         }
 
 
         public List<Specialization> GetSpecializations()
         {
-            return Specializations;
+            return SpecializationsList;
         }
     }
 }
